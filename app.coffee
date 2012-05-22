@@ -33,9 +33,10 @@ app.listen process.env.PORT || 3000, () ->
 
 sio = io.listen(app)
 
-sio.configure () ->
-  sio.set "transports", ["xhr-polling"]
-  sio.set "polling duration", 10
+if process.env.HEROKU
+  sio.configure () ->
+    sio.set "transports", ["xhr-polling"]
+    sio.set "polling duration", 10
 
 for own attr, command of sockets
   sio.of('/'+attr).on('connection', command.connection) 
