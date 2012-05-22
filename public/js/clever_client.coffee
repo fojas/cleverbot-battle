@@ -1,7 +1,7 @@
 $ = jQuery
 
 window.CleverClient = ->
-  @socket = io.connect('http://localhost:3000/index')
+  @socket = io.connect('/index')
   @socket.on 'response', =>
     if @callback
       @callback.apply @,  arguments
